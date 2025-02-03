@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import '../assests/css/work.css'
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,57 +63,58 @@ const Home = () => {
   return (
     <div className="container">
       <div>
-        <button onClick={() => setIsModalOpen(true)}>Add Details</button>
+      <button
+        onClick={() => setIsModalOpen((prev) => !prev)}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        {isModalOpen ? "Close Form" : "Add Details"}
+      </button>
       </div>
       {isModalOpen && (
-        <div>
-          <form>
-            <label htmlFor="name">name</label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              id="name"
-              placeholder="enter name"
-              name="name"
-            />
-            <br />
-            <br />
-            <label htmlFor="age">age</label>
-            <input
-              onChange={(e) => setAge(e.target.value)}
-              value={age}
-              id="age"
-              placeholder="enter age"
-              name="age"
-            />
-            <br />
-            <br />
-            <label htmlFor="contact">contact</label>
-            <input
-              onChange={(e) => setContact(e.target.value)}
-              value={contact}
-              id="contact"
-              placeholder="enter contact"
-              name="contact"
-            />
-            <br />
-            <br />
-            <label htmlFor="email">email</label>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              id="email"
-              placeholder="enter email"
-              name="email"
-            />
-            <br />
-            <br />
-            <button onClick={(e) => onclickSubmit(e)}>Submit</button>
-          </form>
-        </div>
+        <motion.div
+        initial={{ opacity: 0, x: -100 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 1 }}
+        className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto"
+      >
+        <form>
+          <label htmlFor="name" className="block text-gray-700">
+            Name
+          </label>
+          <input className="w-full border p-2 rounded mb-2" />
+  
+          <label htmlFor="age" className="block text-gray-700">
+            Age
+          </label>
+          <input className="w-full border p-2 rounded mb-2" />
+  
+          <label htmlFor="contact" className="block text-gray-700">
+            Contact
+          </label>
+          <input className="w-full border p-2 rounded mb-2" />
+  
+          <label htmlFor="email" className="block text-gray-700">
+            Email
+          </label>
+          <input className="w-full border p-2 rounded mb-4" />
+  
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+          >
+            Submit
+          </motion.button>
+        </form>
+      </motion.div>
       )}
 
-      <div>
+      <motion.div
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 1 }}>
         <table>
           <tr>
             <th>id</th>
@@ -139,7 +141,7 @@ const Home = () => {
             </tr>
           ))}
         </table>
-      </div>
+      </motion.div>
     </div>
   );
 };
