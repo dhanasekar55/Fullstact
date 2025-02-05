@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import '../assests/css/work.css'
+import "../assests/css/work.css";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -54,67 +54,93 @@ const Home = () => {
 
     navigate("/edit", { state: item });
   };
-  const onclickDelete =(item)=>{
-    navigate("/delete",{state: item});
-  }
+  const onclickDelete = (item) => {
+    navigate("/delete", { state: item });
+  };
 
   console.log(tableData);
 
   return (
     <div className="container">
       <div>
-      <button
-        onClick={() => setIsModalOpen((prev) => !prev)}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        {isModalOpen ? "Close Form" : "Add Details"}
-      </button>
+        <button
+          onClick={() => setIsModalOpen((prev) => !prev)}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          {isModalOpen ? "Close Form" : "Add Details"}
+        </button>
       </div>
       {isModalOpen && (
         <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -50 }}
-        transition={{ duration: 1 }}
-        className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto"
-      >
-        <form>
-          <label htmlFor="name" className="block text-gray-700">
-            Name
-          </label>
-          <input className="w-full border p-2 rounded mb-2" />
-  
-          <label htmlFor="age" className="block text-gray-700">
-            Age
-          </label>
-          <input className="w-full border p-2 rounded mb-2" />
-  
-          <label htmlFor="contact" className="block text-gray-700">
-            Contact
-          </label>
-          <input className="w-full border p-2 rounded mb-2" />
-  
-          <label htmlFor="email" className="block text-gray-700">
-            Email
-          </label>
-          <input className="w-full border p-2 rounded mb-4" />
-  
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
-          >
-            Submit
-          </motion.button>
-        </form>
-      </motion.div>
+          initial={{ opacity: 0, x: -100 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 1 }}
+          className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto"
+        >
+          <form>
+            <label htmlFor="name" className="block text-gray-700">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              className="w-full border p-2 rounded mb-2"
+            />
+
+            <label htmlFor="age" className="block text-gray-700">
+              Age
+            </label>
+            <input
+              type="number"
+              id="age"
+              onChange={(e) => setAge(e.target.value)}
+              value={age}
+              className="w-full border p-2 rounded mb-2"
+            />
+
+            <label htmlFor="contact" className="block text-gray-700">
+              Contact
+            </label>
+            <input
+              type="text"
+              id="contact"
+              onChange={(e) => setContact(e.target.value)}
+              value={contact}
+              className="w-full border p-2 rounded mb-2"
+            />
+
+            <label htmlFor="email" className="block text-gray-700">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              className="w-full border p-2 rounded mb-4"
+            />
+
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="w-full bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded"
+              onClick={onclickSubmit}
+            >
+              Submit
+            </motion.button>
+          </form>
+        </motion.div>
       )}
 
       <motion.div
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 50 }}
-      transition={{ duration: 1 }}>
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 50 }}
+        transition={{ duration: 1 }}
+      >
         <table>
           <tr>
             <th>id</th>
